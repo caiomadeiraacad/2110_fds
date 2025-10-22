@@ -33,5 +33,5 @@ public class ServicoDeEstoque{
 
     public void baixaEstoque(long id,int qtdade){
         estoque.baixaEstoque(id,qtdade);
-    }  
+    }
 }

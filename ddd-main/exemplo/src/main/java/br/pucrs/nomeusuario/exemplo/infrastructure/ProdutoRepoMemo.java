@@ -18,6 +18,7 @@ public class ProdutoRepoMemo implements IProdutoRepositorio{
         produtos.add(new ProdutoModel(30,"Fogao",1200.0));
         produtos.add(new ProdutoModel(40,"Lava-louça",1800.0));
         produtos.add(new ProdutoModel(50,"lava-roupas",2870.0));
+        produtos.add(new ProdutoModel(10, "Produto Teste", 2100.0));
     }
 
     public List<ProdutoModel> todos(){

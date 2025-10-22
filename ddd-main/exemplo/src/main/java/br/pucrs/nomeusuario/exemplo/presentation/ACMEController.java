@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import br.pucrs.nomeusuario.exemplo.application.dtos.ProdutoDTO;
+import br.pucrs.nomeusuario.exemplo.application.usecases.EfetuarVendaUC;
 import br.pucrs.nomeusuario.exemplo.application.usecases.ProdutosDisponiveisUC;
 import br.pucrs.nomeusuario.exemplo.application.usecases.QuantidadeDisponivelProdutoUC;
 
@@ -13,12 +14,14 @@ import br.pucrs.nomeusuario.exemplo.application.usecases.QuantidadeDisponivelPro
 public class ACMEController {
     private ProdutosDisponiveisUC produtosDisponiveis;
     private QuantidadeDisponivelProdutoUC quantidadeProduto; 
+    private EfetuarVendaUC efetuarVenda;
 
     @Autowired
     public ACMEController(ProdutosDisponiveisUC produtosDisponiveis,
-    QuantidadeDisponivelProdutoUC quantidadeProduto){
+    QuantidadeDisponivelProdutoUC quantidadeProduto, EfetuarVendaUC efetuarVenda){
         this.produtosDisponiveis = produtosDisponiveis;
         this.quantidadeProduto = quantidadeProduto;
+        this.efetuarVenda = efetuarVenda;
     }
 
     @GetMapping("")
@@ -37,6 +40,14 @@ public class ACMEController {
     @CrossOrigin(origins = "*")
     public int quantidadeProduto(@PathVariable(value="id") long idProduto){
         return quantidadeProduto.run(idProduto);
-    } 
+    }
 
+    @GetMapping("venda")
+    @CrossOrigin(origins = "*")
+    public double efetuarVenda(@RequestParam(value = "idProduto") long idProduto,
+                               @RequestParam(value = "quantidade") int quantidade) 
+    {
+        return efetuarVenda.run(idProduto, quantidade);
+    }
+    
 }
